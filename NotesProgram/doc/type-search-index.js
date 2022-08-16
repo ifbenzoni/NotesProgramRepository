@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"notesProgram.ui","l":"NotesGUI.DisplayPanel"},{"p":"notesProgram.ui","l":"NotesGUI"}]

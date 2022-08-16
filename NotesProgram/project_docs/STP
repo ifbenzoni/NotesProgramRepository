@@ -1,0 +1,43 @@
+System Test Plan:
+
+to run tests:
+from IDE:
+right click GUI file, run as java application
+from desktop:
+double click icon or right click icon and select open
+
+*reset program each test
+
+Test 1:
+ID:
+misc list note removal, updating correctly
+
+Description:
+click the input and selection tab at the top of the program
+
+add new subject called "subject1"
+process: enter name into text box above add and remove subject buttons then click add subject button
+
+select "MISC" from the "Note Types" drop down menu
+
+add three misc notes with contents "one", "two", and "three"
+process: enter contents into contents input text area then click confirm input button
+
+confirm each misc note has appropriate contents in the display area
+
+remove misc note "1" using remove note button
+
+check that the note selection drop down only contains misc notes "1" and "2"
+check that misc note "1" displays "two" as its contents and misc note "2" displays "three" as its contents
+
+Expected Results:
+
+misc notes 1 through 3, all displayed with title corresponding to contents
+
+once misc note 1 is removed the list should shift back so that the first note's contents is "two" and so on
+
+Actual Results:
+
+contents and titles correspond correctly
+
+shift works correctly

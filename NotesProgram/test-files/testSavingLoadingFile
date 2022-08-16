@@ -1,0 +1,112 @@
+-MISC_SECTION-
+---
+===
+1
+===
+subject 2
+===
+adding some misc notes
+===
+---
+===
+2
+===
+subject 2
+===
+more misc
+notes
+===
+-MISC_SECTION-
+
+-IMAGE_SECTION-
+---
+===
+circle image
+===
+subject 1
+===
+C:\Users\ifben\Documents\images\gray_circle.png
+===
+---
+===
+square image
+===
+subject 2
+===
+C:\Users\ifben\Documents\images\black_square.png
+===
+---
+===
+square image
+===
+subject 1
+===
+C:\Users\ifben\Documents\images\black_square.png
+===
+-IMAGE_SECTION-
+
+-VOCAB_SECTION-
+---
+===
+first vocab
+===
+subject 1
+===
+definition one
+with extra line
+===
+additional info one
+extraline
+===
+more
+info
+===
+even
+more
+additional
+info
+---
+===
+vocab two
+===
+subject 1
+===
+definition
+two
+===
+some info
+-VOCAB_SECTION-
+
+-TEXT_EXAMPLE_SECTION-
+---
+===
+example
+two
+===
+subject 1
+===
+second preface
+===
+more
+content
+===
+---
+===
+first example
+===
+subject 1
+===
+preface
+with
+tabs
+===
+some content
+more content
+===
+-TEXT_EXAMPLE_SECTION-
+
+-SUBJECTS_SECTION-
+subject 1
+subject 2
+-SUBJECTS_SECTION-
+
