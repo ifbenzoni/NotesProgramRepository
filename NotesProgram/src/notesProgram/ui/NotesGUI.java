@@ -150,6 +150,8 @@ public class NotesGUI extends JFrame implements ActionListener, WindowListener {
 		jTabbedPane.addTab("Input and Selection", jPanel2);
 		c.add(jTabbedPane);
 		
+		noteTypesAndSelectionPanel.updateNoteTypeDisplay();
+		
 		addWindowListener(this);
 		setVisible(true);
 	}
@@ -395,10 +397,10 @@ public class NotesGUI extends JFrame implements ActionListener, WindowListener {
 			this.setLayout(new GridBagLayout());
 			typeMenuTitle = new JLabel("Note Types");
 			noteTypeMenu = new JComboBox<String>();
+			noteTypeMenu.addItem("VOCAB");
 			noteTypeMenu.addItem("EXAMPLE");
 			noteTypeMenu.addItem("IMAGE");
 			noteTypeMenu.addItem("MISC");
-			noteTypeMenu.addItem("VOCAB");
 			
 			noteSelectionMenuLabel = new JLabel("note selection");
 			noteSelectionMenu = new JComboBox<String>();
@@ -540,6 +542,16 @@ public class NotesGUI extends JFrame implements ActionListener, WindowListener {
 					}
 				}
 			}
+		}
+		
+		/**
+		 * updates display for current note type
+		 */
+		public void updateNoteTypeDisplay() {
+			currentNoteType = noteTypeMenu.getSelectedItem().toString();
+			inputPanel.updateContentInput();
+			displayPanel.updateDisplayedSetup();
+			updateNotesSelection();
 		}
 		
 	}
@@ -1239,7 +1251,9 @@ public class NotesGUI extends JFrame implements ActionListener, WindowListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		//System.out.println(fileName);
-		notesManager.saveNotes(new File(fileName));
+		if (fileName != null) {
+			notesManager.saveNotes(new File(fileName));
+		}
 		System.exit(0);
 	}
 
