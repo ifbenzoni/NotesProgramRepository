@@ -9,13 +9,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * GUI for notes program
  * 
  * @author Isaiah Benzoni
  */
-public class NotesGUI extends JFrame implements ActionListener {
+public class NotesGUI extends JFrame implements ActionListener, WindowListener {
 	
 	/** serial version UID */
 	private static final long serialVersionUID = 1L;
@@ -62,6 +63,9 @@ public class NotesGUI extends JFrame implements ActionListener {
 	/** panel for input and selection section */
 	private JPanel jPanel2;
 	
+	/** file name for autosave */
+	private String fileName;
+	
 	/**
 	 * creates new notes manager and calls method to start GUI
 	 */
@@ -81,7 +85,7 @@ public class NotesGUI extends JFrame implements ActionListener {
 		setSize((int) screenWidth / 7 * 6, (int) screenHeight / 7 * 6);
 		setLocation((int) screenWidth / 12, (int) screenHeight / 12);
 		setTitle(TITLE);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		generalProgramMenuBar = new JMenuBar();
 		generalProgramMenu = new JMenu("File");
@@ -146,8 +150,8 @@ public class NotesGUI extends JFrame implements ActionListener {
 		jTabbedPane.addTab("Input and Selection", jPanel2);
 		c.add(jTabbedPane);
 		
+		addWindowListener(this);
 		setVisible(true);
-		
 	}
 	
 	/**
@@ -166,12 +170,15 @@ public class NotesGUI extends JFrame implements ActionListener {
 		//JFileChooser jFileChooser = new JFileChooser("./");
 		if (e.getSource() == Load) {
 			try {
-				notesManager.loadNotes(new File(getFileName(true)));
+				fileName = getFileName(true);
+				notesManager.loadNotes(new File(fileName));
 				subjectsPanel.updateSubjectsMenu();
 			} catch (IllegalArgumentException iae) {
 				JOptionPane.showMessageDialog(NotesGUI.this, "Unable to load file." + iae.getMessage());
 			} catch (IllegalStateException ise) {
 				
+			} catch (NoSuchElementException exception) {
+				notesManager.saveNotes(new File(fileName));
 			}
 		} else if (e.getSource() == Save) {
 			try {
@@ -343,7 +350,11 @@ public class NotesGUI extends JFrame implements ActionListener {
 			for (int i = 0; i < notesManager.getSubjects().size(); i++) {
 				subjectMenu.addItem(notesManager.getSubjects().get(i));
 			}
-			notesManager.setCurrentSubject((String) subjectMenu.getSelectedItem());
+			try {
+				notesManager.setCurrentSubject((String) subjectMenu.getSelectedItem());
+			} catch (IllegalArgumentException exception) {
+				notesManager.setCurrentSubject("");
+			}
 			newSubjectArea.setText("");
 		}
 		
@@ -1216,6 +1227,49 @@ public class NotesGUI extends JFrame implements ActionListener {
 			this.repaint();
 			
 		}
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		//System.out.println(fileName);
+		notesManager.saveNotes(new File(fileName));
+		System.exit(0);
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
